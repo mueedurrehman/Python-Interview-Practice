@@ -70,6 +70,7 @@ def palindrome_checker (input):
 #Learning: string.replace(oldvalue, newvalue, count) method
 # print (palindrome_checker('Able was I ere I saw Elba'))
 
+#TODO: Review this solution
 #Definitely good solution
 def one_away(a,b):
     totalEdits = 0
@@ -109,7 +110,7 @@ def one_away(a,b):
             index += 1
         return True
 
-print (one_away ("pale", "ale"))
+# print (one_away ("pale", "ale"))
 
 #Error 1: Need to add element when repetitions added as for loop advances
 #Error 2: Need to have a method for adding in the last elements
@@ -136,4 +137,68 @@ def string_compression(uncompressed):
 # Learnings: Need to cast integers to strings
 # print (string_compression("aabdcccccaaa"))
 
-def rotate_matrix(matrx):
+#90 degree right rotation is transpose and hflip
+#90 degree left rotation is transpose and vflip
+import numpy as np
+#this one works for MxN and not just NxN
+def rotate_matrix(matrix):
+    original__matrix = matrix.copy()
+    refactored = []
+    zeros = []
+    orig_rows = len(matrix)
+    orig_columns = len(matrix[0])
+    for i in range(orig_rows): #make sure to draw on paper for ease
+        zeros.append(0)
+    for i in range(orig_columns):
+        new = zeros.copy()
+        refactored.append(new)
+    for row in range(orig_rows): #This is essentially a transpose
+        for column in range(orig_columns):
+            refactored[column][row] = matrix[row][column]
+    for row in refactored:
+        row.reverse()
+    return refactored
+
+
+# print (rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8]]))
+
+#TODO: practice on an in place version of the rotations
+def rotate_matrix_using_np (matrix):
+    matrix = np.transpose(matrix)
+    matrix = np.flip(matrix, axis = 1)
+    return matrix
+#Learnings: numpy operations require assignment while no assignment for list.reverse() and list.append()
+#axs = 0 is vertical, 1 is horizontal
+# test = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+# print (rotate_matrix_using_np(test))
+
+def zero_matrix(matrix):
+    row_index = 0
+    indices = []
+    for row in matrix:
+        column_index = 0
+        for column in row:
+            if column == 0:
+                indices.append((row_index, column_index))
+            column_index +=1
+        row_index +=1
+    for row,column in indices:
+        matrix[row, :] = 0
+        matrix[:,column] = 0
+    return matrix
+# test_zero = np.array([[1,2,0,4],[5,6,7,8]])
+# print (zero_matrix(test_zero))
+#Learning: Indexing entire rows and columns for a numpy array
+
+#can check using the in operator
+def string_rotation(s1,s2):
+    repeated = s2 + s2
+    if s1 in repeated:
+        return True
+    else:
+        return False
+
+print(string_rotation("waterbottle", "erbottlewat"))
+# print(string_rotation("waterbottle", "erbottlewst"))
+
+# def rotate_matrix_in_place(matrix):
