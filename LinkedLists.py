@@ -103,7 +103,7 @@ class SLinkedList:
     def add_node (self, new_node):
         new_node.set_next(self.head)
         self.head = new_node
-        self.sie +=1
+        self.size +=1
 
     def remove (self, data):
         current = self.head
