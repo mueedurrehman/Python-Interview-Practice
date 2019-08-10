@@ -53,7 +53,7 @@ class LinkedList:
         current = self.head
         previous = None
         found = False
-        while current:
+        while current and not found: #Search till not found AND list not empty
             if current.get_data() == data:
                 found = True
             else:
@@ -74,6 +74,11 @@ class LinkedList:
             print (current.data)
             current = current.get_next()
 
+test_remove = LinkedList()
+test_remove.insert(5)
+test_remove.insert(6)
+test_remove.remove(5)
+test_remove.print_list()
 
 #ToDo: Test this method
 def remove_dups_buffer(slist):
