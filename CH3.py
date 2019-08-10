@@ -44,7 +44,8 @@ class stack:
     def print_stack(self):
         for item in self.items:
             print(item, end = ", ")
-
+#Learning: Getting the last k items from a list and indexing for that
+#Getting the len - k items from a list
 class queue:
 
     def __init__(self):
@@ -99,7 +100,7 @@ def balanced_parentheses(string):
         return True
 
 #Learning: For your own classes, you need your own size as len() will not work
-print (balanced_parentheses("(()()(()"))
+# print (balanced_parentheses("(()()(()"))
 
 #Learning:
 #import collections
@@ -152,18 +153,18 @@ class set_of_stacks:
 #Make sure to decrement the cur_stack pointer
 #Also, make sure function definitions have the proper parameters
 #pop does not need any additional parameters (other than self)
-test_set = set_of_stacks()
-test_set.push(1)
-test_set.push(2)
-test_set.push(3)
-test_set.push(4)
-test_set.push(5)
-test_set.push(6)
-test_set.push(7)
-check_removal_1 = test_set.pop()
-check_removal_2 = test_set.pop()
-check_removal_3 = test_set.pop()
-print('done testing')
+# test_set = set_of_stacks()
+# test_set.push(1)
+# test_set.push(2)
+# test_set.push(3)
+# test_set.push(4)
+# test_set.push(5)
+# test_set.push(6)
+# test_set.push(7)
+# check_removal_1 = test_set.pop()
+# check_removal_2 = test_set.pop()
+# check_removal_3 = test_set.pop()
+# print('done testing')
 
 #ToDo: Test regular and multipop optimization
 class my_queue_two_stacks:
@@ -204,6 +205,8 @@ class my_queue_two_stacks:
             self.stack_store.push(self.stack_temp.pop())
         return target
 #Learning: Stacks with efficient multiple push and pop
+#Note that internal list returned by pop_mmultiple_eff must be reversed
+#To respect pop properly
 # test_queue = my_queue_two_stacks()
 # test_queue.enqueue('a')
 # test_queue.enqueue('b')
