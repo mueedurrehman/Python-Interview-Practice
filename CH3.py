@@ -474,10 +474,10 @@ class animal_shelter_2:
 
     def dequeue_dog(self):
         return self.dequeue_animal("d")
-#Learning when removing, the else is bound to trigger everytime
+#Learning: when removing, the else is bound to trigger everytime
 #as the condition is till you have not found and current is not None
 #Here, you have to keep on continuing till the list is null so
-#current must be going to next every single time.
+#current must be going to next every single time and this should not be in the else.
 #Note that you must remove a node in LinkedList when dequeueing the animals
 #This is AN ELEGANT SOLUTION.
 
