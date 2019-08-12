@@ -9,7 +9,7 @@ class graphNode:
 
 class graph:
     def __init__(self, vertices = None):
-        if vertices = None:
+        if vertices is None:
             vertices = []
         self.vertices = vertices
 
