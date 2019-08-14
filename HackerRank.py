@@ -106,7 +106,7 @@ number = 10000007
 #         if column_index < max_column:
 #             for i in range(max_row - 1, row_index - 1, -1):
 #                 spiral.append(grid[i][column_index])
-#             column_index +=1
+#             column_index += 1
 #     # print (spiral)
 #     primes = filter(is_prime, spiral)
 #     return primes
