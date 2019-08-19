@@ -74,3 +74,69 @@ class Solution:
             l2 = l2.next
             current = current.next
         return head
+
+
+# Works but is a slow implementation
+def isUgly(self, num: int) -> bool:
+    if num < 1:
+        return False
+    elif num == 1:
+        return True
+    else:
+        if (num % 2 != 0 and num % 3 != 0 and num % 5 != 0):
+            return False
+        print("here")
+        limit = round(num // 2)
+        iter = 7
+        while (iter <= limit):
+            if num % iter == 0:
+                divisor = iter
+                print(divisor)
+                while divisor > 1:
+                    if divisor % 2 == 0:
+                        divisor = divisor / 2
+                    elif divisor % 3 == 0:
+                        divisor = divisor / 3
+                    elif divisor % 5 == 0:
+                        divisor = divisor / 5
+                    else:
+                        return False
+            iter += 2
+        return True
+
+
+def isUgly(self, num: int) -> bool:
+    if num < 1:
+        return False
+    elif num == 1:
+        return True
+    else:
+        if (num % 2 != 0 and num % 3 != 0 and num % 5 != 0):
+            return False
+        while num % 2 == 0:
+            num = num / 2
+        while num % 3 == 0:
+            num = num / 3
+        while num % 5 == 0:
+            num = num / 5
+        if num == 1:
+            return True
+        return False
+
+def mySqrt(x):
+    if x < 2:
+        return x
+    left = 2
+    right = x // 2
+    while (left <= right):
+        guess = (left + right) // 2
+        squared = guess * guess
+        if squared < x:
+            left = guess + 1
+        elif squared > x:
+            right = guess - 1
+        else:
+            return guess #It is a perfect square
+    return right #return the integer square root that is less than
+
+print(mySqrt(9))
