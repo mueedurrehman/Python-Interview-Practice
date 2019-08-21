@@ -174,3 +174,36 @@ def characterReplacement(self, s: str, k: int) -> int:
             # answer = s[start: end + 1]
         end += 1
     return max_length
+
+def threeSum(nums):
+    if len(nums) < 3:
+        return []
+    solutions = []
+    length = len(nums)
+    hashtable = {}
+    for integer in nums:
+        if integer not in hashtable:
+            hashtable[integer] = 1
+        else:
+            hashtable[integer] += 1
+    for i in range(length - 2):
+        for j in range(i + 1,length - 1):
+            pair_neg = -(nums[i] + nums[j])
+            if pair_neg in hashtable:
+                if nums[i] == nums[j] and hashtable[nums[i]] == 1:
+                    continue
+                if nums[j] == pair_neg and hashtable[nums[j]] == 1:
+                    continue
+                if nums[i] == pair_neg and hashtable[nums[i]] == 1:
+                    continue
+                if nums[i] == pair_neg and nums[j] == pair_neg and hashtable[nums[i]] < 3:
+                    continue
+                result = [nums[i], nums[j], pair_neg]
+                result.sort()
+                if result not in solutions:
+                    solutions.append(result)
+    return solutions
+
+print(threeSum([-2,0,0,2,2]))
+
+

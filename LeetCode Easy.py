@@ -139,4 +139,13 @@ def mySqrt(x):
             return guess #It is a perfect square
     return right #return the integer square root that is less than
 
-print(mySqrt(9))
+# print(mySqrt(9))
+
+def reversebin(n):
+    binary = bin(n)[2:]
+    reversed = binary[::-1]
+    print(reversed)
+    return int(reversed,2)
+
+print (reversebin(int("00000010100101000001111010011100", 2)))
+
