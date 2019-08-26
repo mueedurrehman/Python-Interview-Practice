@@ -147,5 +147,56 @@ def reversebin(n):
     print(reversed)
     return int(reversed,2)
 
-print (reversebin(int("00000010100101000001111010011100", 2)))
+# print (reversebin(int("00000010100101000001111010011100", 2)))
 
+def maxProduct(nums):
+    start = 0
+    end = 0
+    if nums == []:
+        return None
+    product = None
+    max_product = None
+    while end < len(nums):
+        nxt = nums[end]
+        if product is not None:
+            product = product * nxt
+        else:
+            product = nxt
+        if max_product is None:
+            max_product = product
+        if product > max_product:
+            max_product = product
+        if product < 0 and (end == len(nums) - 1 or nums[end + 1] == 0):
+            while start < end:
+                remove = nums[start]
+                product = product / remove
+                if product > max_product:
+                    max_product = product
+                start += 1
+        elif product == 0:
+            start = end + 1
+            product = None
+        end += 1
+    return int(max_product)
+
+# print(maxProduct([-2,0,-1]))
+
+# print(list("abcdef"))
+
+#Look at conditions
+#The deadline is strictly greater than the previous start
+#and <= previous deadline
+#The start is >= previous start but less than next deadline
+def meeting_rooms_one(meetings):
+    no_conflict = []
+    for new in meetings:
+        for previous in no_conflict:
+            if new[1] > previous[0] and new[1] <= previous[1] or new[0] >= previous[0] and new[1] < previous[1]:
+                return False
+        no_conflict.append(new)
+    return True
+
+print (meeting_rooms_one([[1,4],[5,6],[8,9],[2,6]]))
+
+def meeting_rooms_log(meetings):
+    
