@@ -204,6 +204,86 @@ def threeSum(nums):
                     solutions.append(result)
     return solutions
 
-print(threeSum([-2,0,0,2,2]))
+# print(threeSum([-2,0,0,2,2]))
 
 
+def numIslands(grid):
+    stack = []
+    rows = len(grid)
+    columns = len(grid[0])
+    islands = 0
+    def dfs_walk(coord):
+        stack.append(coord)
+        nonlocal islands
+        while stack != []:
+            coord = stack.pop()
+            r = coord[0]
+            c = coord[1]
+            grid[r][c] = None
+            if r != rows - 1 and grid[r + 1][c] == "1":
+                stack.append((r+1,c))
+            if r != 0 and grid[r - 1][c] == "1":
+                stack.append((r - 1,c))
+            if c != 0 and grid[r][c - 1] == "1":
+                stack.append((r,c-1))
+            if c != columns - 1 and grid[r][c + 1] == "1":
+                stack.append((r,c+1))
+        print(grid)
+        islands +=1
+    for r in range(rows):
+        for c in range(columns):
+            if grid [r][c] == "1":
+                dfs_walk((r,c))
+    return islands
+# list1 = [["1","1","1"],["0","1","0"],["0","1","0"]]
+
+def friend_circles(M):
+        length = len(M)
+        visited = [False] * length
+        stack = []
+        circles = 0
+        def dfs_walk(friend):
+            stack.append(friend)
+            nonlocal circles
+            while stack != []:
+                nonlocal length
+                friend = stack.pop()
+                visited[friend] = True
+                for i in range(length):
+                    if M[friend][i] == 1 and visited[i] == False:
+                        stack.append(i)
+            circles += 1
+        for r in range(length):
+            if not visited[r]:
+                dfs_walk(r)
+        return circles
+
+# print(friend_circles([[1,1,0],[1,1,0],[0,0,1]]))
+
+def topKFrequent(nums, k):
+    counts = {}
+    max_freq = 0
+    for element in nums:
+        if element not in counts:
+            counts[element] = 1
+        else:
+            counts[element] += 1
+        if counts[element] > max_freq:
+            max_freq = counts[element]
+    #[[]] using this to initialize means internal lists point to the same object
+    frequency = [ [] for i in range(max_freq)]
+    for key, freq in counts.items():
+        target = frequency[freq - 1]
+        target.append(key)
+    output = []
+    for i in range(1, len(frequency) + 1):
+        if k != 0 and frequency[-i] != []:
+            for item in frequency[-i]:
+                output.append(item)
+                k -= 1
+                if k == 0:
+                    return output
+        else:
+            return output
+
+print(topKFrequent([3,0,1,0], 1))

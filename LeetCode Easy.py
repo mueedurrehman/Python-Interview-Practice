@@ -196,7 +196,35 @@ def meeting_rooms_one(meetings):
         no_conflict.append(new)
     return True
 
-print (meeting_rooms_one([[1,4],[5,6],[8,9],[2,6]]))
+# print (meeting_rooms_one([[1,4],[5,6],[8,9],[2,6]]))
 
 def meeting_rooms_log(meetings):
-    
+    meetings = sorted(meetings, key = lambda x: x[0])
+    for i in range(1,len(meetings)):
+        if meetings[i][0] < meetings[i - 1][1]:
+            return False
+    return True
+
+# print (meeting_rooms_log([[1,4],[5,6],[12,13],[7,11]]))
+
+def meeting_rooms_required(meetings):
+    times = []
+    for meeting in meetings:
+        times.append((meeting[0],'s'))
+        times.append((meeting[1],'d'))
+    times = sorted(times, key = lambda x : x[0])
+    counter = 0
+    max = 0
+    for item in times:
+        if item[1] == 's':
+            counter +=1
+            if counter > max:
+                max = counter
+        else:
+            counter -=1
+    return max
+
+# print (meeting_rooms_required([[1,4],[5,6],[12,13],[7,11]]))
+list1 = [1,2,3]
+list1[0:0].append(1)
+print(list1[2:])
