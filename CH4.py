@@ -112,6 +112,7 @@ class trie:
 
     def __init__(self):
         self.head = {}
+        self.word_list = []
 
     def add(self, word):
         cur = self.head
@@ -129,6 +130,68 @@ class trie:
             cur = cur[ch]
         if '*' in cur:
             return True
+
+class trie_node():
+    def __init__(self):
+        self.children = {}
+        self.last = False
+
+class trie_auto:
+    def __init__(self):
+        self.root = trie_node()
+        self.word_list = []
+
+    def add(self, word):
+        node = self.root
+        for ch in word:
+            if ch not in node.children:
+                node.children[ch] = trie_node()
+            node = node.children[ch]
+        node.last = True
+
+    def formtrie(self, keys):
+        for key in keys:
+            self.add(key)
+
+    def search(self, word):
+        node = self.root
+        for ch in word:
+            if ch not in node.children:
+                return False
+            node = node.children[ch]
+        return node.last
+
+    def suggestionsRec(self, node, word):
+        if node.last:
+            self.word_list.append(word)
+
+        for a, n in node.children.items():
+            self.suggestionsRec(n, word + a)
+
+    def suggestions(self, word):
+        node = self.root
+        temp_word = ""
+        #Need this search which terminates as long as prefix
+        for ch in word:
+            if ch not in node.children:
+                return None
+
+            temp_word += ch
+            node = node.children[ch]
+        self.suggestionsRec(node, temp_word)
+        for s in self.word_list:
+            print(s)
+
+
+words = ["hello", "hello", "hell", "hel", "help", "cat"]
+
+t = trie_auto()
+t.formtrie(words)
+s = "hello...."
+import string
+print(s.translate(str.maketrans('', '', string.punctuation)))
+# t.suggestions("hello")
+print ("".strip())
 
 class graphNode:
     def __init__(self, name):
@@ -238,10 +301,10 @@ def min_tree(array, tree):
         tree.right = t_node()
         min_tree(right_array, tree.right)
 
-tree = t_node()
-array = [1,2,3,4,5,6,7]
-min_tree(array, tree)
-in_order_traversal(tree, print)
+# tree = t_node()
+# array = [1,2,3,4,5,6,7]
+# min_tree(array, tree)
+# in_order_traversal(tree, print)
 
 #ToDo: Implement Binary Search Tree
 class Node:
@@ -413,12 +476,12 @@ def rec_checker_right(tree, minimum):
         return False
 #Learning: Your in order traversal method is very powerful. Remember that
 #Recursive algorithms need more practice. Remember that each branching if needs to be a return
-print("Testing v1")
-print(validate_bst_v1(tree))
-print(validate_bst_v1(tree1))
-print("Testing rec")
-print(validate_bst(tree))
-print(validate_bst(tree1))
+# print("Testing v1")
+# print(validate_bst_v1(tree))
+# print(validate_bst_v1(tree1))
+# print("Testing rec")
+# print(validate_bst(tree))
+# print(validate_bst(tree1))
 
 class tp_node():
     def __init__(self, data = None, left = None, right = None, parent = None):
@@ -464,7 +527,7 @@ def successor(node):
 # tree_test.parent = tree_parent.left.right
 # print(successor(tree_test).data)
 
-def build_order(projects, dependencies):
-    nodes = []
-    for item in projects:
-        graph_node
+# def build_order(projects, dependencies):
+#     nodes = []
+#     for item in projects:
+#         graph_node

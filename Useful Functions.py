@@ -10,4 +10,4 @@ def is_prime_v2(number):
             return False
         iter += 2
     return True
-print is_prime_v2()
+# print is_prime_v2()
